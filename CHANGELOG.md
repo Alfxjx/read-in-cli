@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Alfxjx/read-in-cli/compare/v1.0.3...v1.1.0) (2026-03-26)
+
+###  Features
+
+* enhance configuration management with update and reset options ([7528bb9](https://github.com/Alfxjx/read-in-cli/commit/7528bb9c66244cba706503bc970da79501c71302))
+* update app directory structure for development environment ([79391b3](https://github.com/Alfxjx/read-in-cli/commit/79391b360b59990fe91daa99f9af96aa405722be))
+
 ## 1.0.3 (2026-03-26)
 
 ###  Features
