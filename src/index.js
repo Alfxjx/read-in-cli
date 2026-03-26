@@ -2,6 +2,7 @@
 
 import { Command } from 'commander';
 import { resolve } from 'node:path';
+import { createRequire } from 'node:module';
 import blessed from 'blessed';
 import { createScreen } from './ui/screen.js';
 import { showBookSelect } from './ui/book-select.js';
@@ -12,12 +13,15 @@ import { addBook } from './store/library.js';
 import { getConfig, updateConfig, resetConfig } from './store/config.js';
 import { APP_DIR, CONFIG_FILE } from './store/paths.js';
 
+const require = createRequire(import.meta.url);
+const { version } = require('../package.json');
+
 const program = new Command();
 
 program
   .name('ricli')
   .description('RICLI - 在命令行中阅读书籍 (epub, txt)')
-  .version('1.0.0')
+  .version(version)
   .argument('[path]', '要打开的书籍文件路径 (.epub 或 .txt)')
   .action(async (path) => {
     const config = getConfig();
