@@ -1,0 +1,112 @@
+{
+  "name": "ricli",
+  "version": "1.0.0",
+  "description": "在命令行中阅读书籍 (epub, txt)",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "ricli": "./src/index.js"
+  },
+  "files": [
+    "src/**/*.js",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "prepare": "husky",
+    "release": "release-it",
+    "release:patch": "release-it patch",
+    "release:minor": "release-it minor",
+    "release:major": "release-it major",
+    "release:dry": "release-it --dry-run",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "reader",
+    "epub",
+    "txt",
+    "terminal",
+    "ebook"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "",
+  "bugs": {
+    "url": ""
+  },
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "commander": "^12.1.0",
+    "epub2": "^3.0.2",
+    "html-to-text": "^9.0.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@release-it/conventional-changelog": "^10.0.6",
+    "husky": "^9.1.7",
+    "release-it": "^19.2.4"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}",
+      "tagName": "v${version}",
+      "tagAnnotation": "Release v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": " Features"
+            },
+            {
+              "type": "fix",
+              "section": " Bug Fixes"
+            },
+            {
+              "type": "perf",
+              "section": " Performance"
+            },
+            {
+              "type": "refactor",
+              "section": " Refactoring"
+            },
+            {
+              "type": "docs",
+              "section": " Documentation"
+            },
+            {
+              "type": "chore",
+              "section": " Chores",
+              "hidden": true
+            },
+            {
+              "type": "ci",
+              "section": " CI/CD",
+              "hidden": true
+            }
+          ]
+        },
+        "infile": "CHANGELOG.md"
+      }
+    }
+  }
+}

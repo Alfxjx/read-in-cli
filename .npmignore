@@ -1,0 +1,12 @@
+# dev tooling
+node_modules/
+.husky/
+commitlint.config.js
+
+# test files
+test-book.txt
+*.epub
+
+# misc
+.gitignore
+package-lock.json
