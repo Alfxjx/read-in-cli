@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0](https://github.com/Alfxjx/read-in-cli/compare/v1.1.0...v1.2.0) (2026-03-26)
+
+###  Features
+
+* update versioning to use package.json version and import createRequire ([b479586](https://github.com/Alfxjx/read-in-cli/commit/b479586aa0690a17c9a1f923528cff6d4201390c))
+
 ## [1.1.0](https://github.com/Alfxjx/read-in-cli/compare/v1.0.3...v1.1.0) (2026-03-26)
 
 ###  Features
