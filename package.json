@@ -1,6 +1,6 @@
 {
   "name": "ricli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "在命令行中阅读书籍 (epub, txt)",
   "type": "module",
   "main": "src/index.js",
