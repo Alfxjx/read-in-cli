@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3 (2026-03-26)
+
+###  Features
+
+* init ([4e2c078](https://github.com/Alfxjx/read-in-cli/commit/4e2c07895fb39013dc2071c80e0fd2e3c268d8d3))
+
 ## 1.0.2 (2026-03-26)
 
 ###  Features
