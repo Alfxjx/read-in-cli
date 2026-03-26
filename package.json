@@ -1,6 +1,6 @@
 {
-  "name": "ricli",
-  "version": "1.0.1",
+  "name": "@alfxjx/ricli",
+  "version": "1.0.2",
   "description": "在命令行中阅读书籍 (epub, txt)",
   "type": "module",
   "main": "src/index.js",
@@ -40,6 +40,9 @@
     "url": "https://github.com/Alfxjx/read-in-cli"
   },
   "homepage": "",
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/Alfxjx/read-in-cli/issues"
   },
