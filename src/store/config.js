@@ -3,7 +3,7 @@ import { CONFIG_FILE } from './paths.js';
 
 const DEFAULT_CONFIG = {
   theme: {
-    fg: 'white',
+    fg: 'grey',
     bg: 'black',
     headerFg: 'yellow',
     headerBg: 'blue',

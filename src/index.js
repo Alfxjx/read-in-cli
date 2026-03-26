@@ -9,7 +9,8 @@ import { showReader } from './ui/reader-view.js';
 import { showInputPrompt } from './ui/input-prompt.js';
 import { parseBook } from './parser/index.js';
 import { addBook } from './store/library.js';
-import { getConfig } from './store/config.js';
+import { getConfig, updateConfig, resetConfig } from './store/config.js';
+import { APP_DIR, CONFIG_FILE } from './store/paths.js';
 
 const program = new Command();
 
@@ -17,16 +18,59 @@ program
   .name('ricli')
   .description('RICLI - 在命令行中阅读书籍 (epub, txt)')
   .version('1.0.0')
-  .argument('[file]', '要打开的书籍文件路径 (.epub 或 .txt)')
-  .action(async (file) => {
+  .argument('[path]', '要打开的书籍文件路径 (.epub 或 .txt)')
+  .action(async (path) => {
     const config = getConfig();
     const screen = createScreen(config);
 
-    if (file) {
-      await openBook(screen, resolve(file));
+    if (path) {
+      await openBook(screen, resolve(path));
     } else {
       showLibrary(screen);
     }
+  });
+
+program
+  .command('config')
+  .description('查看或修改配置')
+  .option('--reset', '重置为默认配置')
+  .option('--set <key=value>', '设置单个配置项，支持 theme.fg=cyan 格式')
+  .action((opts) => {
+    if (opts.reset) {
+      resetConfig();
+      console.log('已重置为默认配置。');
+      return;
+    }
+    if (opts.set) {
+      const eqIdx = opts.set.indexOf('=');
+      if (eqIdx === -1) {
+        console.error('格式错误，请使用 key=value 格式，例如: --set theme.fg=cyan');
+        process.exit(1);
+      }
+      const key = opts.set.slice(0, eqIdx).trim();
+      const value = opts.set.slice(eqIdx + 1).trim();
+
+      // Build nested object from dot-notation key
+      const parts = key.split('.');
+      const partial = {};
+      let cursor = partial;
+      for (let i = 0; i < parts.length - 1; i++) {
+        cursor[parts[i]] = {};
+        cursor = cursor[parts[i]];
+      }
+      cursor[parts[parts.length - 1]] = isNaN(value) ? value : Number(value);
+
+      const updated = updateConfig(partial);
+      console.log(`已更新: ${key} = ${value}`);
+      console.log('\n当前配置:');
+      console.log(JSON.stringify(updated, null, 2));
+      return;
+    }
+
+    // Default: print current config
+    const config = getConfig();
+    console.log(`配置文件路径: ${CONFIG_FILE}\n`);
+    console.log(JSON.stringify(config, null, 2));
   });
 
 program.parse();
