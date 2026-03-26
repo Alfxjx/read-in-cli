@@ -33,15 +33,15 @@
     "terminal",
     "ebook"
   ],
-  "author": "",
+  "author": "alfxjx",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Alfxjx/read-in-cli"
   },
   "homepage": "",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/Alfxjx/read-in-cli/issues"
   },
   "dependencies": {
     "blessed": "^0.1.81",
