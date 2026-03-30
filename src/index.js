@@ -20,9 +20,9 @@ const program = new Command();
 
 program
   .name('ricli')
-  .description('RICLI - 在命令行中阅读书籍 (epub, txt)')
+  .description('RICLI - Read books (epub, txt) in your terminal')
   .version(version)
-  .argument('[path]', '要打开的书籍文件路径 (.epub 或 .txt)')
+  .argument('[path]', 'Path to the book file to open (.epub or .txt)')
   .action(async (path) => {
     const config = getConfig();
     const screen = createScreen(config);
@@ -36,19 +36,19 @@ program
 
 program
   .command('config')
-  .description('查看或修改配置')
-  .option('--reset', '重置为默认配置')
-  .option('--set <key=value>', '设置单个配置项，支持 theme.fg=cyan 格式')
+  .description('View or modify configuration')
+  .option('--reset', 'Reset to default configuration')
+  .option('--set <key=value>', 'Set a single config value, supports dot-notation e.g. theme.fg=cyan')
   .action((opts) => {
     if (opts.reset) {
       resetConfig();
-      console.log('已重置为默认配置。');
+      console.log('Configuration reset to defaults.');
       return;
     }
     if (opts.set) {
       const eqIdx = opts.set.indexOf('=');
       if (eqIdx === -1) {
-        console.error('格式错误，请使用 key=value 格式，例如: --set theme.fg=cyan');
+        console.error('Invalid format. Use key=value, e.g.: --set theme.fg=cyan');
         process.exit(1);
       }
       const key = opts.set.slice(0, eqIdx).trim();
@@ -65,15 +65,15 @@ program
       cursor[parts[parts.length - 1]] = isNaN(value) ? value : Number(value);
 
       const updated = updateConfig(partial);
-      console.log(`已更新: ${key} = ${value}`);
-      console.log('\n当前配置:');
+      console.log(`Updated: ${key} = ${value}`);
+      console.log('\nCurrent config:');
       console.log(JSON.stringify(updated, null, 2));
       return;
     }
 
     // Default: print current config
     const config = getConfig();
-    console.log(`配置文件路径: ${CONFIG_FILE}\n`);
+    console.log(`Config file: ${CONFIG_FILE}\n`);
     console.log(JSON.stringify(config, null, 2));
   });
 
@@ -94,7 +94,7 @@ function showLibrary(screen) {
 function promptOpenFile(screen) {
   showInputPrompt(
     screen,
-    '请输入书籍文件路径 (.epub 或 .txt):',
+    'Enter book file path (.epub or .txt):',
     async (value) => {
       if (value && value.trim()) {
         await openBook(screen, resolve(value.trim()));
@@ -116,7 +116,7 @@ async function openBook(screen, filePath) {
     left: 'center',
     width: 30,
     height: 3,
-    content: '{center}正在加载书籍...{/center}',
+    content: '{center}Loading book...{/center}',
     tags: true,
     border: { type: 'line' },
     style: { fg: 'white', bg: 'black', border: { fg: 'gray' } },
@@ -132,7 +132,7 @@ async function openBook(screen, filePath) {
     screen.render();
 
     if (!book.chapters || book.chapters.length === 0) {
-      showError(screen, '书籍内容为空或无法解析', () => showLibrary(screen));
+      showError(screen, 'Book is empty or could not be parsed', () => showLibrary(screen));
       return;
     }
 
@@ -141,7 +141,7 @@ async function openBook(screen, filePath) {
     });
   } catch (err) {
     loading.detach();
-    showError(screen, `打开书籍失败:\n${err.message}`, () => showLibrary(screen));
+    showError(screen, `Failed to open book:\n${err.message}`, () => showLibrary(screen));
   }
 }
 
@@ -151,7 +151,7 @@ function showError(screen, message, onClose) {
     left: 'center',
     width: '60%',
     height: 'shrink',
-    label: ' 错误 ',
+    label: ' Error ',
     border: { type: 'line' },
     style: { fg: 'red', bg: 'black', border: { fg: 'red' }, label: { fg: 'red', bold: true } },
   });
