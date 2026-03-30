@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1](https://github.com/Alfxjx/read-in-cli/compare/v1.2.0...v1.2.1) (2026-03-30)
+
+###  Bug Fixes
+
+* update README and CLI descriptions to English for consistency ([ee8b622](https://github.com/Alfxjx/read-in-cli/commit/ee8b622c03f06991259642b0544d667ee66e3d17))
+
 ## [1.2.0](https://github.com/Alfxjx/read-in-cli/compare/v1.1.0...v1.2.0) (2026-03-26)
 
 ###  Features
