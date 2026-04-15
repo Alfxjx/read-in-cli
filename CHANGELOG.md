@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0](https://github.com/Alfxjx/read-in-cli/compare/v1.2.1...v1.4.0) (2026-04-15)
+
+###  Features
+
+* add mock terminal feature with command simulation and key bindings ([1cdf7a4](https://github.com/Alfxjx/read-in-cli/commit/1cdf7a40b2e843d97391016d89938a548719ef5e))
+
 ## [1.3.0](https://github.com/Alfxjx/read-in-cli/compare/v1.2.1...v1.3.0) (2026-04-15)
 
 ###  Features
