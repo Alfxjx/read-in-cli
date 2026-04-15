@@ -2,6 +2,7 @@ import blessed from 'blessed';
 import { getConfig } from '../store/config.js';
 import { saveProgress, getProgress } from '../store/progress.js';
 import { showToc } from './toc-view.js';
+import { showMockTerminal } from './mock-terminal.js';
 
 export function showReader(screen, book, onExit) {
   const config = getConfig();
@@ -12,6 +13,7 @@ export function showReader(screen, book, onExit) {
   const saved = getProgress(filePath);
   let chapterIndex = Math.min(saved.chapterIndex, chapters.length - 1);
   let tocVisible = false;
+  let mockTerminalVisible = false;
 
   // Clear screen
   screen.children.forEach((c) => c.detach());
@@ -144,8 +146,16 @@ export function showReader(screen, book, onExit) {
     screen.render();
   });
 
+  screen.key(['m'], () => {
+    if (mockTerminalVisible || tocVisible) return;
+    mockTerminalVisible = true;
+    showMockTerminal(screen, () => {
+      mockTerminalVisible = false;
+    });
+  });
+
   screen.key(['t'], () => {
-    if (tocVisible) return;
+    if (tocVisible || mockTerminalVisible) return;
     tocVisible = true;
     showToc(
       screen,
@@ -165,7 +175,7 @@ export function showReader(screen, book, onExit) {
   });
 
   screen.key(['q', 'escape'], () => {
-    if (tocVisible) return;
+    if (tocVisible || mockTerminalVisible) return;
     persistProgress();
     // Remove all key listeners to avoid leaking into next screen
     screen.unkey(['down', 'j']);
